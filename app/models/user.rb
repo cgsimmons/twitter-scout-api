@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   before_create :generate_api_key
+  has_many :scheduled_tweets, dependent: :destroy
 
   validates :username, presence: true
   validates :email, presence: true
