@@ -1,4 +1,5 @@
 module V1
+  # Class for sessions
   class SessionsController < ApplicationController
     skip_before_action :authenticate_user_from_token!
 
@@ -19,8 +20,8 @@ module V1
 
     def invalid_login_attempt
       warden.custom_failure!
-      render json: {error: t('sessions_controller.invalid_login_attempt')}, status: :unprocessable_entity
+      render json: { error: t('sessions_controller.invalid_login_attempt') },
+             status: :unprocessable_entity
     end
-
   end
 end

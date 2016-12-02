@@ -1,3 +1,4 @@
+# User model
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -9,12 +10,12 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :email, presence: true
 
-
   private
-  def generate_api_key
-    begin
-      self.api_key = SecureRandom.hex(32)
-    end while User.exists?(api_key: api_key)
-  end
 
+  def generate_api_key
+    loop do
+      self.api_key = SecureRandom.hex(32)
+      break unless User.exists?(api_key: api_key)
+    end
+  end
 end
